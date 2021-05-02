@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+#include <queue>
+#include <algorithm>
+using namespace std;
+
+string S;
+string T;
+int main(){
+
+  cin >> S;
+  deque<char> q; //ローカル変数qを生成
+  bool rev = false;
+
+  for (char c : S){
+      if (c == 'R') rev ^= 1; //Rの現れる回数によって最終的に反転させるか決める。
+      else if(rev) q.push_front(c); //反転させる状態の時、先頭に追加
+      else q.push_back(c);
+  }
+  if (rev) reverse(q.begin(),q.end());
+  
+  //空文字Tの中にqの文字を順番に入れていく
+  //連続する場合は入れずに、すでにTに入っている文字も削除
+  for (char c : q) {
+    if (T.size() && T.back() == c) T.pop_back(); //Tの末尾を削除(Tが1以上の長さでTの末尾とcが等しい時)
+    else T.push_back(c);　//Tの末尾に追加
+  }
+  cout << T << endl;
+  return 0;
+}
