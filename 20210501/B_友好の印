@@ -1,0 +1,30 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int N;
+double D,H;
+double d[110];
+double h[110];
+double ans[110];
+double answer;
+
+int main(){
+
+  cin >> N >> D >> H;
+  for (int i = 1; i <= N; ++i) cin >> d[i] >> h[i]; 
+   
+  for (int i = 1; i <= N; ++i) {
+  ans[i] = (D*h[i] - H*d[i]) / (D - d[i]);
+  }
+  
+  //answer = *max_element(ans, ans + N);
+  answer = ans[0];
+    for (int i = 1; i <= N; i++) {
+        if (answer < ans[i]) {
+            answer = ans[i];
+        }
+    }
+  cout << answer << endl;
+  return 0;
+}
